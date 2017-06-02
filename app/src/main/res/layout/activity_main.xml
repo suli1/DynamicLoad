@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    >
+
+  <Button
+      android:id="@+id/btn_init_libs"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="INIT SDK"
+      />
+
+  <Button
+      android:id="@+id/btn_say_hello"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Say Hello"
+      />
+
+  <TextView
+      android:id="@+id/tv_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="Hello World!"
+      />
+
+  <Button
+      android:id="@+id/btn_location"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="开启定位"
+      />
+
+  <TextView
+      android:id="@+id/tv_location"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      tools:text="定位"
+      />
+
+
+</LinearLayout>

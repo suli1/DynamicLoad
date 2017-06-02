@@ -1,0 +1,67 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.butterknife'
+
+android {
+  compileSdkVersion 25
+  buildToolsVersion "25.0.2"
+  defaultConfig {
+    applicationId "com.suli.dynamicload"
+    minSdkVersion 15
+    targetSdkVersion 25
+    versionCode 1
+    versionName "1.0"
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+
+  signingConfigs {
+    debug {
+      storeFile file("../keystore/debug.keystore")
+      storePassword "paem1234"
+      keyAlias "paem"
+      keyPassword "paem1234"
+    }
+    release {
+      storeFile file("../keystore/release.keystore")
+      storePassword "paem1234"
+      keyAlias "paem"
+      keyPassword "paem1234"
+    }
+  }
+
+  buildTypes {
+    debug {
+      signingConfig signingConfigs.debug
+    }
+
+    release {
+      signingConfig signingConfigs.release
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+
+  productFlavors {
+    local {}
+    dynamic {}
+  }
+}
+
+dependencies {
+  compile project(':lib.base')
+
+  localCompile project(path: ':lib.sdk')
+
+  compile fileTree(dir: 'libs', include: ['*.jar'])
+  androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  })
+  compile 'com.android.support:appcompat-v7:25.3.1'
+  compile 'com.android.support.constraint:constraint-layout:1.0.2'
+  testCompile 'junit:junit:4.12'
+
+  compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.4'
+  compile 'com.jakewharton:butterknife:8.6.0'
+  annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+
+  provided fileTree(dir: '../lib.sdk/libs', includes: ['*.jar'])
+}
