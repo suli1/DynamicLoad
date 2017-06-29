@@ -1,8 +1,8 @@
 package com.suli.dynamicload;
 
 import android.Manifest;
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindView;
@@ -13,7 +13,7 @@ import com.suli.libbase.ISayHi;
 import com.tbruyelle.rxpermissions.RxPermissions;
 import rx.functions.Action1;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
   private final static String PERMISSIONS_INIT_LIBS[] = new String[] {
       Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
       @Override public void call(Boolean granted) {
         if (granted) {
           // 模拟下载jar，so库, 初始化SDK
-          if (SdkFactory.init()) {
+          if (SdkFactory.init(MainActivity.this)) {
             Toast.makeText(MainActivity.this, "Init sdk successfully!", Toast.LENGTH_SHORT).show();
           } else {
             Toast.makeText(MainActivity.this, "Init sdk failed!", Toast.LENGTH_SHORT).show();

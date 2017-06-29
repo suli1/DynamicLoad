@@ -12,13 +12,19 @@ public class Constant {
   public final static String CLASS_HELLO = "com.suli.libsdk.HelloWrapper";
   public final static String CLASS_LOACTION = "com.suli.libsdk.LocationWrapper";
 
-  private static String PATH_LIBS;
+  private static String PATH_FILES;
+  private static String PATH_LIB;
 
   public static void init(Context context) {
-    PATH_LIBS = context.getFilesDir().getParent() + File.separator + "libs";
+    PATH_FILES = context.getFilesDir().getAbsolutePath();
+    PATH_LIB = context.getFilesDir().getParent() + File.separator + "lib";
   }
 
-  public static String getPathLibs() {
-    return PATH_LIBS;
+  public static String getPathFiles() {
+    return PATH_FILES;
+  }
+
+  public static String getPathLib() {
+    return PATH_LIB;
   }
 }

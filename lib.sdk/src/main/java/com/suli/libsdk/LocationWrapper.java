@@ -27,6 +27,7 @@ public class LocationWrapper implements ILocation {
   }
 
   @Override public void start() {
+    Log.i(TAG, "location client start");
     initLocation();
     mLocationClient.start();
   }

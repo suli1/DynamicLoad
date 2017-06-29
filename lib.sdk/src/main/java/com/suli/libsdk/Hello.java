@@ -8,11 +8,22 @@ package com.suli.libsdk;
 public class Hello {
 
   static {
-    System.loadLibrary("sdk-lib");
+    try {
+      System.loadLibrary("sdk-lib");
+    } catch (UnsatisfiedLinkError e) {
+      e.printStackTrace();
+    }
   }
 
   public String sayHi() {
-    return "From Hello Class, " + sayHello();
+    String hello;
+    try {
+      hello = sayHello();
+    } catch (UnsatisfiedLinkError e) {
+      // ignore
+      hello = "";
+    }
+    return "From Hello Class, " + hello;
   }
 
   private native String sayHello();

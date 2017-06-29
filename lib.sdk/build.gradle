@@ -1,12 +1,14 @@
-apply plugin: 'com.android.library'
+//apply plugin: 'com.android.library'
+apply plugin: 'com.android.application'
 
 android {
-  compileSdkVersion 25
-  buildToolsVersion "25.0.2"
+  compileSdkVersion 23
+  buildToolsVersion "23.0.2"
 
   defaultConfig {
+    applicationId "com.suli.dynamicload"
     minSdkVersion 15
-    targetSdkVersion 25
+    targetSdkVersion 23
     versionCode 1
     versionName "1.0"
 
@@ -25,8 +27,28 @@ android {
     }
   }
 
-  buildTypes {
+  signingConfigs {
+    debug {
+      storeFile file("../keystore/debug.keystore")
+      storePassword "paem1234"
+      keyAlias "paem"
+      keyPassword "paem1234"
+    }
     release {
+      storeFile file("../keystore/release.keystore")
+      storePassword "paem1234"
+      keyAlias "paem"
+      keyPassword "paem1234"
+    }
+  }
+
+  buildTypes {
+    debug {
+      signingConfig signingConfigs.debug
+    }
+
+    release {
+      signingConfig signingConfigs.debug
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
@@ -46,12 +68,12 @@ dependencies {
   androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'
   })
-  compile 'com.android.support:appcompat-v7:25.3.1'
+  compile 'com.android.support:appcompat-v7:23.0.0'
   testCompile 'junit:junit:4.12'
 }
 
 task deleteJar(type: Delete) {
-  delete 'out/sdk.jar','out/libskd-lib.so'
+  delete 'out/sdk.jar', 'out/libskd-lib.so'
 }
 
 task createJar(type: Copy) {
