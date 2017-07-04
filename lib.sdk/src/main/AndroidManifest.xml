@@ -36,6 +36,12 @@
         android:name="com.baidu.lbsapi.API_KEY"
         android:value="au6ul4R043D5eLadBpXPSsGjxVcG7OG5"/>
 
+    <service
+        android:name=".TargetService"
+        android:enabled="true"
+        android:process=":plugin01"
+        />
+
   </application>
 
 </manifest>

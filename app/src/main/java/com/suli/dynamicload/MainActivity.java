@@ -2,6 +2,8 @@ package com.suli.dynamicload;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,5 +75,11 @@ public class MainActivity extends Activity {
         }
       }
     });
+  }
+
+  @OnClick(R.id.btn_start_service) public void onClickStartService() {
+    Intent intent = new Intent();
+    intent.setComponent(new ComponentName("com.suli.dynamicload.sdk", "com.suli.libsdk.TargetService"));
+    startService(intent);
   }
 }

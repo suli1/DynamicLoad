@@ -44,5 +44,12 @@
       tools:text="定位"
       />
 
+  <Button
+      android:id="@+id/btn_start_service"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Start Service"
+      />
+
 
 </LinearLayout>

@@ -79,22 +79,22 @@ public final class BaseDexClassLoaderHookHelper {
     dexElementArray.set(pathListObj, newElements);
     nativeLibraryPathElementArray.set(pathListObj, newNativeElements);
 
-    // check
-    Method findLibraryMethod =
-        pathListObj.getClass().getDeclaredMethod("findLibrary", String.class);
-    findLibraryMethod.setAccessible(true);
-    Object nativeLibrary = findLibraryMethod.invoke(pathListObj, "lib-sdk");
-    L.i("native library:" + nativeLibrary);
-
-    Method findNativeLibraryMethod =
-        elementClass.getDeclaredMethod("findNativeLibrary", String.class);
-    String filename = System.mapLibraryName("lib-sdk");
-    for (Object element : newNativeElements) {
-      Object path = findNativeLibraryMethod.invoke(element, filename);
-      if (path != null) {
-        L.i("path:" + path);
-        break;
-      }
-    }
+    //// check
+    //Method findLibraryMethod =
+    //    pathListObj.getClass().getDeclaredMethod("findLibrary", String.class);
+    //findLibraryMethod.setAccessible(true);
+    //Object nativeLibrary = findLibraryMethod.invoke(pathListObj, "lib-sdk");
+    //L.i("native library:" + nativeLibrary);
+    //
+    //Method findNativeLibraryMethod =
+    //    elementClass.getDeclaredMethod("findNativeLibrary", String.class);
+    //String filename = System.mapLibraryName("lib-sdk");
+    //for (Object element : newNativeElements) {
+    //  Object path = findNativeLibraryMethod.invoke(element, filename);
+    //  if (path != null) {
+    //    L.i("path:" + path);
+    //    break;
+    //  }
+    //}
   }
 }
