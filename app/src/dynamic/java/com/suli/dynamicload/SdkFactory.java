@@ -101,7 +101,7 @@ public class SdkFactory {
         // copy apk and so
         String srcPath = Environment.getExternalStorageDirectory().getPath()
             + File.separator
-            + "dynamic-libs"
+            + "dynamic-res"
             + File.separator;
         File downloadLibs = new File(srcPath);
         if (downloadLibs.exists() && downloadLibs.isDirectory()) {

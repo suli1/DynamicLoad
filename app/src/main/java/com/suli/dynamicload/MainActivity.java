@@ -11,7 +11,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.suli.libbase.ILocation;
-import com.suli.libbase.ISayHi;
+import com.suli.libbase.L;
 import com.tbruyelle.rxpermissions.RxPermissions;
 import rx.functions.Action1;
 
@@ -37,6 +37,8 @@ public class MainActivity extends Activity {
     setContentView(R.layout.activity_main);
     ButterKnife.bind(this);
     rxPermissions = new RxPermissions(this);
+
+    printClassLoader();
   }
 
   @OnClick(R.id.btn_init_libs) public void onClickInitLibs() {
@@ -45,6 +47,7 @@ public class MainActivity extends Activity {
         if (granted) {
           // 模拟下载jar，so库, 初始化SDK
           if (SdkFactory.init(MainActivity.this)) {
+            printClassLoader();
             Toast.makeText(MainActivity.this, "Init sdk successfully!", Toast.LENGTH_SHORT).show();
           } else {
             Toast.makeText(MainActivity.this, "Init sdk failed!", Toast.LENGTH_SHORT).show();
@@ -58,9 +61,10 @@ public class MainActivity extends Activity {
   }
 
   @OnClick(R.id.btn_say_hello) public void onClickSayHello() {
-    ISayHi iSayHi = SdkFactory.createHello(MainActivity.this);
-    tvText.setText(iSayHi.sayHi());
-    Toast.makeText(MainActivity.this, iSayHi.sayHi(), Toast.LENGTH_LONG).show();
+    //ISayHi iSayHi = SdkFactory.createHello(MainActivity.this);
+    Hello hello = new Hello();
+    tvText.setText(hello.sayHi());
+    Toast.makeText(MainActivity.this, hello.sayHi(), Toast.LENGTH_LONG).show();
   }
 
   @OnClick(R.id.btn_location) public void onClickLocation() {
@@ -79,7 +83,20 @@ public class MainActivity extends Activity {
 
   @OnClick(R.id.btn_start_service) public void onClickStartService() {
     Intent intent = new Intent();
-    intent.setComponent(new ComponentName("com.suli.dynamicload.sdk", "com.suli.libsdk.TargetService"));
+    intent.setComponent(
+        new ComponentName("com.suli.dynamicload.sdk", "com.suli.libsdk.TargetService"));
     startService(intent);
+  }
+
+  private void printClassLoader() {
+    ClassLoader classLoader = getClassLoader();
+    if (classLoader != null) {
+      int i = 0;
+      L.i("[onCreate] classLoader " + i++ + " : " + classLoader.toString());
+      while (classLoader.getParent() != null) {
+        classLoader = classLoader.getParent();
+        L.i("[onCreate] classLoader " + i++ + " : " + classLoader.toString());
+      }
+    }
   }
 }

@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <jni.h>
 
-#define TARGET_CLASS "com/suli/libsdk/Hello"
+#define TARGET_CLASS "com/suli/dynamicload/Hello"
 #define TARGET_SAY_HELLO "sayHello"
 #define TARGET_SAY_HELLO_SIG "()Ljava/lang/String;"
 
