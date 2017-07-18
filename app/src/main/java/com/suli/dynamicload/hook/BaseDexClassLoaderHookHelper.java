@@ -84,12 +84,13 @@ public final class BaseDexClassLoaderHookHelper {
     Method findLibraryMethod =
         pathListObj.getClass().getDeclaredMethod("findLibrary", String.class);
     findLibraryMethod.setAccessible(true);
-    Object nativeLibrary = findLibraryMethod.invoke(pathListObj, "lib-sdk");
+    Object nativeLibrary = findLibraryMethod.invoke(pathListObj, "sdk-lib");
     L.i("native library:" + nativeLibrary);
 
     Method findNativeLibraryMethod =
         elementClass.getDeclaredMethod("findNativeLibrary", String.class);
-    String filename = System.mapLibraryName("lib-sdk");
+    findLibraryMethod.setAccessible(true);
+    String filename = System.mapLibraryName("sdk-lib");
     for (Object element : newNativeElements) {
       Object path = findNativeLibraryMethod.invoke(element, filename);
       if (path != null) {
